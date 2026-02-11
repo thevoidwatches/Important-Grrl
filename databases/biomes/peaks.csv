@@ -1,0 +1,47 @@
+pokemon,tableweight,min_level,prevolution
+Abomasnow,2,25,Snover
+Absol,3,0,n/a
+Alolan Ninetales,1,20,Alolan Vulpix
+Alolan Vulpix,1,0,n/a
+Armarouge,1,20,Charcadet
+Aron,4,0,n/a
+Beheeyem,1,25,Elgyem
+Ceruledge,1,20,Charcadet
+Cetitan,2,20,Cetoddle
+Charcadet,2,0,n/a
+Corvisquire,2,10,Rookidee
+Rookidee,4,0,n/a
+Deino,4,0,n/a
+Elgyem,2,0,n/a
+Fraxure,3,15,Axew
+Frosmoth,2,15,Snom
+Galarian Darmanitan,2,25,Darumaka
+Nacli,2,0,n/a
+Naclstack,1,20,Nacli
+Hisuian Avalugg,2,25,Bergmite
+Hisuian Braviary,2,10,Rufflet
+Hitmonchan,2,15,Tyrogue
+Hitmonlee,2,15,Tyrogue
+Hitmontop,2,15,Tyrogue
+Kazeon,2,20,Eevee
+Lairon,2,25,Aron
+Lucario,2,20,Riolu
+Mankey,4,0,n/a
+Mienshao,1,25,Mienfoo
+Mienfoo,2,0,n/a
+Noibat,4,0,n/a
+Noivern,2,25,Noibat
+Olympian Machoke,2,15,Olympian Machop
+Pancham,2,0,n/a
+Pangoro,1,25,Pancham
+Primeape,2,20,Mankey
+Rufflet,3,0,n/a
+Sneasel,2,0,n/a
+Hisuian Sneasel,2,0,n/a
+Sneasler,2,25,Hisuian Sneasel
+Snom,4,0,n/a
+Snover,4,0,n/a
+Tinkatuff,1,20,Tinkatink
+Tinkatink,2,0,n/a
+Weavile,2,25,Sneasel
+Zweilous,2,15,Deino

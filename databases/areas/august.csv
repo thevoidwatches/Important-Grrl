@@ -1,0 +1,7 @@
+pokemon,tableweight,min_level,prevolution
+swamp,40,0,n/a
+industrial,30,0,n/a
+river,20,0,n/a
+Koffing,6,0,n/a
+Weezing,2,25,Koffing
+Galarian Weezing,2,25,Koffing

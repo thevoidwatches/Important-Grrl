@@ -1,0 +1,6 @@
+pokemon,tableweight,min_level,prevolution
+lake,40,0,n/a
+river,30,0,n/a
+beach,20,0,n/a
+Feebas,7,0,n/a
+Milotic,3,15,Feebas

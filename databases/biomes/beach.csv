@@ -1,0 +1,27 @@
+pokemon,tableweight,min_level,prevolution
+Clamperl,6,0,n/a
+Clauncher,5,0,n/a
+Clawitzer,2,25,Clauncher
+Clobbopus,4,0,n/a
+Corsola,6,0,n/a
+Froakie,3,0,n/a
+Frogadier,1,10,Froakie
+Galarian Slowbro,1,25,Galarian Slowpoke
+Galarian Slowpoke,2,0,n/a
+Galarian Slowking,1,25,Galarian Slowpoke
+Grapploct,2,25,Clobbopus
+Kilowattrel,2,20,Wattrel
+Kingler,3,20,Krabby
+Krabby,5,0,n/a
+Mareanie,4,0,n/a
+Pelipper,3,20,Wingull
+Pikipek,5,0,n/a
+Popplio,4,0,n/a
+Sandygast,7,0,n/a
+Shellder,6,0,n/a
+Shellos,6,0,n/a
+Toxapex,2,25,Mareanie
+Trumbeak,3,10,Pikipek
+Wattrel,4,0,n/a
+Wimpod,8,0,n/a
+Wingull,5,0,n/a

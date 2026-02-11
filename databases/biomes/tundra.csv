@@ -1,0 +1,29 @@
+pokemon,tableweight,min_level,prevolution
+Abomasnow,3,25,Snover
+Alolan Ninetales,2,20,Alolan Vulpix
+Alolan Sandshrew,5,0,n/a
+Alolan Sandslash,3,20,Alolan Sandshrew
+Alolan Vulpix,4,0,n/a
+Cetitan,2,20,Cetoddle
+Cetoddle,4,0,n/a
+Cryogonal,3,0,n/a
+Dewgong,3,25,Seel
+Frosmoth,3,15,Snom
+Galarian Darmanitan,2,25,Galarian Darumaka
+Galarian Darumaka,4,0,n/a
+Gastly,5,0,n/a
+Haunter,3,15,Gastly
+Lucario,2,20,Riolu
+Misdreavus,3,0,n/a
+Piloswine,3,15,Swinub
+Piplup,4,0,n/a
+Prinplup,2,10,Piplup
+Riolu,4,0,n/a
+Sealeo,3,15,Spheal
+Seel,5,0,n/a
+Sneasel,5,0,n/a
+Snom,5,0,n/a
+Snover,5,0,n/a
+Spheal,5,0,n/a
+Swinub,7,0,n/a
+Weavile,3,25,Sneasel

@@ -1,0 +1,28 @@
+pokemon,tableweight,min_level,prevolution
+Rolycoly,5,0,n/a
+Camerupt,2,25,Numel
+Carkol,3,15,Rolycoly
+Centiskorch,1,25,Sizzlipede
+Charmander,5,0,n/a
+Charmeleon,3,10,Charmander
+Chimchar,5,0,n/a
+Combusken,3,10,Torchic
+Cyndaquil,5,0,n/a
+Flareon,3,20,Eevee
+Hisuian Arcanine,3,20,Hisuian Growlithe
+Hisuian Growlithe,5,0,n/a
+Magby,5,0,n/a
+Magmar,3,25,Magby
+Monferno,3,10,Chimchar
+Ninetales,3,20,Vulpix
+Numel,4,0,n/a
+Quilava,3,10,Cyndaquil
+Salandit,5,0,n/a
+Salazzle,3,25,Salandit
+Sizzlipede,2,0,n/a
+Slugma,5,0,n/a
+Magcargo,3,25,Slugma
+Torchic,5,0,n/a
+Torkoal,5,0,n/a
+Vulpix,5,0,n/a
+Ninetales,3,20,Vulpix

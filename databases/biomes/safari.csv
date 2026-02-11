@@ -1,0 +1,54 @@
+pokemon,tableweight,min_level,prevolution
+Alolan Geodude,3,0,n/a
+Alolan Graveler,2,20,Alolan Geodude
+Arctibax,1,15,Frigibax
+Bagon,2,0,n/a
+Buizel,2,0,n/a
+Carnivine,2,0,n/a
+Chansey,1,15,Happiny
+Clefairy,1,5,Cleffa
+Cleffa,2,0,n/a
+Copperajah,2,25,Cufant
+Cufant,4,0,n/a
+Deino,2,0,n/a
+Dragonair,1,15,Dratini
+Dratini,2,0,n/a
+Duraludon,2,0,n/a
+Duskull,2,0,n/a
+Frigibax,2,0,n/a
+Gabite,1,15,Gible
+Geodude,3,0,n/a
+Gible,2,0,n/a
+Girafarig,2,0,n/a
+Graveler,2,20,Geodude
+Hakomo-o,1,15,Jangmo-o
+Happiny,2,0,n/a
+Hoppip,2,0,n/a
+Jangmo-o,2,0,n/a
+Kangaskahn,2,0,n/a
+Komala,2,0,n/a
+Larvitar,2,0,n/a
+Lickitung,2,0,n/a
+Litleo,2,0,n/a
+Machoke,1,15,Machop
+Machop,2,0,n/a
+Meditite,2,0,n/a
+Munchlax,4,0,n/a
+Murkrow,3,0,n/a
+Paldean Tauros (Fighting),2,0,n/a
+Paldean Tauros (Fighting/Water),2,0,n/a
+Paldeon Tauros (Fighting/Fire),2,0,n/a
+Pupitar,1,15,Larvitar
+Pyroar,1,20,Litleo
+Seviper,2,0,n/a
+Shelgon,1,15,Bagon
+Shuckle,2,0,n/a
+Shuppet,2,0,n/a
+Sizzlipede,2,0,n/a
+Skiploom,1,10,Hoppip
+Skorupi,2,0,n/a
+Snorlax,2,20,Munchlax
+Surskit,2,0,n/a
+Tauros,2,0,n/a
+Zangoose,2,0,n/a
+Zweilous,1,15,Deino

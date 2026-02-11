@@ -1,0 +1,6 @@
+pokemon,tableweight,min_level,prevolution
+crags,40,0,n/a
+city,30,0,n/a
+peaks,20,0,n/a
+Murkrow,7,0,n/a
+Honchkrow,3,20,Murkrow
