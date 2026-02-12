@@ -320,7 +320,7 @@ class PTU(commands.Cog):
     @app_commands.describe(rolls="The number of times to roll in the same route or biome. Defaults to 1.")
     @app_commands.describe(advantage="True if you cannot find the same pokemon multiple times. Caps rolls at 10.")
     @app_commands.describe(label="The label to declare for this command.")
-    async def encounter(self, context, area: str = "", biome: str = "", city: str = "", route: int = 0, level: int = 1, rolls: int = 1, advantage: bool = False, label: str = ""):
+    async def encounter(self, context, level: int, area: str = "", biome: str = "", city: str = "", route: int = 0, rolls: int = 1, advantage: bool = False, label: str = ""):
         checks = 0
         if area:
             checks += 1
