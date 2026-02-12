@@ -2,8 +2,6 @@
 
 A dice-rolling Discord bot designed for the fan-made [Pokemon Tabletop United](https://pokemontabletop.com/) ttrpg system.
 
-[Add to a server.](http://bit.ly/ImportantGrrl)
-
 To run your own copy of the Important Grrl, simply download the code, create a discord bot through the [discord developer portal](https://discord.com/developers/applications), then save the bot's token in a file called auth.txt in the same folder as the downloaded code. Opening run.bat will then boot up your own copy of the bot.
 
 The `databases` folder contains csv files with data tables, which are randomly rolled from using the scavenge, dousing, encounter, and metronome commands. Be aware that the provided pickup, biome, city, area, and route tables are weighted to favor more common outcomes over rarer ones. In particular, note that the biome, city, area, and route tables are set for a limited subset of the pokedex, and for the creator's homebrew region. If you intend to use this bot's encounter command, it is *strongly* recommended that you run your own copy, and adjust these tables to your liking. Template files are provided within each folder, describing how to set up that folder's tables. To customize the pickup tables, do *not* add or remove tables, but you may add or remove entries from the tables, or change their tableweights and sell prices, to your liking.
