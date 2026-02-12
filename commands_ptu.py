@@ -334,11 +334,11 @@ class PTU(commands.Cog):
         if route:
             checks += 1
             route = f"r{route}"
-            if not table in route_table:
+            if not route in route_table:
                 await context.send("Please select one of the region's routes.")
                 return
             else:
-                table = route_table[f"r{route}"]
+                table = route_table[route]
         if checks == 0:
             await context.send("You must select a biome, city, route, or named area to search for pokemon in.")
             return
