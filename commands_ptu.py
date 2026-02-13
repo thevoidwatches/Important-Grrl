@@ -6,7 +6,6 @@ from discord.ext import commands
 #imports for basic dicebot funcitonality
 import random
 import math
-import re
 from commands_dicebot import Dice, basicHelp, diceHelp
 
 PTU_Dice = Dice()

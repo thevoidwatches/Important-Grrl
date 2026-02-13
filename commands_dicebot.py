@@ -4,9 +4,7 @@ from discord.ext import commands
 
 #imports for basic dicebot funcitonality
 import random
-import math
-import re
-from utilities_text import pluralize, aAn
+from utilities_text import pluralize
 
 random.seed()
 
