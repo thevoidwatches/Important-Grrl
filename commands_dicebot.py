@@ -17,14 +17,14 @@ class Utility(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.hybrid_command()
+    @commands.hybrid_command(description="Checks that the bot is responding by returning its ping.")
     async def ping(self, context):
         await context.send(f'Pong!\nLatency: {round(self.bot.latency * 1000)}ms')
 
-    @commands.command(alias="close")
+    @commands.command(alias=["close"], description="Kills the running instance of the bot so it can restart.")
     async def kill(self, context):
-      await context.send("`Closing the Important Grrl. The grrl will attempt to restart in one minute.`")
-      quit()
+        await context.send("`Closing the Important Grrl. The grrl will attempt to restart in one minute.`")
+        quit()
 
 diceHelp = """
     `/reset`, alias `/seed`, will reset the bot's random number generator by choosing a new seed.
@@ -37,12 +37,14 @@ class Dice(commands.Cog):
       await context.send("I've reset my random number generator.")
 
     @commands.hybrid_command(aliases=["roll"], description="Roll a specified number of dice. Rolls 1d20 by default.")
-    @app_commands.describe(dice="The number of dice in a single roll - the X in 'roll XdY+Z A times'")
-    @app_commands.describe(sides="The number of sides on each die in a single roll - the Y in 'roll XdY+Z A times'")
-    @app_commands.describe(bonus="The bonus to add to a single roll - the Z in 'roll XdY+Z A times'")
-    @app_commands.describe(rolls="The number of separate rolls to make - the A in 'roll XdY+Z A times'")
-    @app_commands.describe(rolls="Any roll of this number of above will add to the number of dice being rolled")
-    @app_commands.describe(label="The label to declare for this command.")
+    @app_commands.describe(
+        dice="The number of dice in a single roll - the X in 'roll XdY+Z A times'",
+        sides="The number of sides on each die in a single roll - the Y in 'roll XdY+Z A times'",
+        bonus="The bonus to add to a single roll - the Z in 'roll XdY+Z A times'",
+        rolls="The number of separate rolls to make - the A in 'roll XdY+Z A times'",
+        explode="Any roll of this number or above will add to the number of dice being rolled",
+        label="The label to declare for this command."
+    )
     async def dice(self, context, dice: int = 1, sides: int = 20, bonus: int = 0, rolls: int = 1, explode: int = 0, label: str = ""):
         # sets values to a minimum to avoid negative inputs where it doesn't make sense
         dice = max(1, dice)
