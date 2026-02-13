@@ -38,9 +38,10 @@ ptuHelp = """
 
 class PTU(commands.Cog):
     @commands.hybrid_command(description="Roll 1-6 d6s for a PTU skill roll, plus a bonus of 0-10.")
-    @app_commands.describe(rank="The numerical rank of your skill, between 1 and 6.")
-    @app_commands.describe(bonus="The bonus to add to your roll, between 0 and 10. Defaults to 0.")
-    @app_commands.describe(label="The label to declare for this command.")
+    @app_commands.describe(
+        rank="The numerical rank of your skill, between 1 and 6.",
+        bonus="The bonus to add to your roll, between 0 and 10. Defaults to 0.",
+        label="The label to declare for this command.")
     async def skill(self, context, rank: int, bonus: int = 0, label: str = ""):
         report = ""
         if rank < 1 or rank > 6:
@@ -56,11 +57,13 @@ class PTU(commands.Cog):
         await PTU_Dice.dice(self, context, dice=rank, sides=6, bonus=bonus, label=label)
 
     @commands.hybrid_command(description="Roll damage for an attack in PTU.")
-    @app_commands.describe(db="The Damage Base of the attack.")
-    @app_commands.describe(bonus="Your Attack or Special Attack.")
-    @app_commands.describe(crit="True only if you rolled a critical hit.")
-    @app_commands.describe(flat="Set as true to use the set damage for a given Damage Base, instead of rolling.")
-    @app_commands.describe(label="The label to declare for this command.")
+    @app_commands.describe(
+        db="The Damage Base of the attack.",
+        bonus="Your Attack or Special Attack.",
+        crit="True only if you rolled a critical hit.",
+        flat="Set as true to use the set damage for a given Damage Base, instead of rolling.",
+        label="The label to declare for this command."
+    )
     async def damage(self, context, db: int, bonus: int, crit: bool = False, flat: bool = False, label: str = ""):
         # Loads in the damage base information.
         report = ""
@@ -109,12 +112,13 @@ class PTU(commands.Cog):
         await context.send(printString.strip())
 
     @commands.hybrid_command(description="Calculate damage recieved from an attack in PTU.")
-    @app_commands.describe(damage="The damage rolled from the attack by using the /damage command.")
-    @app_commands.describe(defense="Your Defense or Special Defense.")
-    @app_commands.describe(effectiveness="An effectiveness multiplier derived from typing, defaulting to 0. Input as a decimal number.")
-    @app_commands.describe(damage_reduction="Your Damage Reduction, if you have any. Defaults to 0")
-    @app_commands.describe(hp="Your current HP, to automatically calculate your remaining HP after applying the given damage")
-    @app_commands.describe(label="The label to declare for this command.")
+    @app_commands.describe(
+        damage="The damage rolled from the attack by using the /damage command.", defense="Your Defense or Special Defense.",
+        effectiveness="An effectiveness multiplier derived from typing, defaulting to 0. Input as a decimal number.",
+        damage_reduction="Your Damage Reduction, if you have any. Defaults to 0",
+        hp="Your current HP, to automatically calculate your remaining HP after applying the given damage",
+        label="The label to declare for this command."
+    )
     async def block(self, context, damage: int, defense: int, effectiveness: float = 1.0, damage_reduction: int = 0, hp: int = 0, label: str = ""):        
         if damage < 1:
             await context.send("This command should only be used for positive damage values.")
@@ -174,11 +178,16 @@ class PTU(commands.Cog):
 
         await context.send(printString.strip())
 
-    @commands.hybrid_command(aliases=["pickup"], description="Roll on PTU's Pickup Table.")
-    @app_commands.describe(rolls="The number of times to roll on the scavenge table. Defaults to 1.")
-    @app_commands.describe(advantage="True if you cannot find the same items multiple times. Caps rolls at 10.")
-    @app_commands.describe(label="The label to declare for this command.")
-    async def scavenge(self, context, rolls: int = 1, advantage: bool = False, label: str = ""):
+    @commands.hybrid_command(
+        aliases=["scavenge"],
+        description="Roll on PTU's Pickup Table."
+    )
+    @app_commands.describe(
+        rolls="The number of times to roll on the scavenge table. Defaults to 1.",
+        advantage="True if you cannot find the same items multiple times. Caps rolls at 10.",
+        label="The label to declare for this command."
+    )
+    async def pickup(self, context, rolls: int = 1, advantage: bool = False, label: str = ""):
         if rolls > 10 and advantage:
             await context.send("When you have advantage, you can only roll up to 10 times at once. Setting rolls to 10.")
             rolls = 10
@@ -254,71 +263,75 @@ class PTU(commands.Cog):
         await context.send(printString.strip())
 
     @commands.hybrid_command(aliases=["pokehunt"], description="Roll for a random encounter, using weighted tables from `/databases/biomes` or `/databases/routes`.")
-    @app_commands.choices(biome=[
-        Choice(name="Abyssal Depths", value="depths"),
-        Choice(name="Badlands", value="badlands"),
-        Choice(name="Beach", value="beach"),
-        Choice(name="Caves", value="caves"),
-        Choice(name="City", value="city"),
-        Choice(name="Crags", value="crags"),
-        Choice(name="Desert", value="desert"),
-        Choice(name="Forest", value="forest"),
-        Choice(name="Glacier", value="glacier"),
-        Choice(name="Grasslands", value="grassland"),
-        Choice(name="Industrial", value="industrial"),
-        Choice(name="Jungle", value="jungle"),
-        Choice(name="Lake", value="lake"),
-        Choice(name="Ocean", value="ocean"),
-        Choice(name="Peaks", value="peaks"),
-        Choice(name="Polar Sea", value="polar"),
-        Choice(name="Ponds and Rivers", value="river"),
-        Choice(name="Ruins", value="ruins"),
-        Choice(name="The Safari Zone", value="safari"),
-        Choice(name="Swamp", value="swamp"),
-        Choice(name="Tundra", value="tundra"),
-        Choice(name="Volcano", value="volcano"),
-        Choice(name="Gift List (Off-Limits to Players)", value="_gift_list_")
-    ])
-    @app_commands.choices(city=[
-        Choice(name="Athens", value="athens"),
-        Choice(name="Boread City", value="boread"),
-        Choice(name="Cyclopton", value="cyclopton"),
-        Choice(name="Dryad City", value="dryad"),
-        Choice(name="Eidolon City", value="eidolon"),
-        Choice(name="Harpyville", value="harpyville"),
-        Choice(name="Hydra City", value="hydra"),
-        Choice(name="Lamia Town", value="lamia"),
-        Choice(name="Manticore Town", value="manticore"),
-        Choice(name="Naiad Town", value="naiad"),
-        Choice(name="Rhodes", value="rhodes"),
-        Choice(name="Rome", value="rome"),
-        Choice(name="Sparta", value="sparta"),
-    ])
-    @app_commands.choices(area=[
-        Choice(name="Mount Aetna", value="aetna"),
-        Choice(name="The Aegis Peaks", value="aegis"),
-        Choice(name="The Regi Mountains", value="regi"),
-        Choice(name="The Spear Peaks", value="spear"),
-        Choice(name="The August Swamp", value="august"),
-        Choice(name="The Crimson Bog", value="crimson"),
-        Choice(name="Golurk Bay", value="golurk"),
-        Choice(name="Selene Lake", value="selene"),
-        Choice(name="The Helios Desert", value="helios"),
-        Choice(name="The Haunted Jungle", value="haunted"),
-        Choice(name="The Sylvan Forest (North)", value="sylvanN"),
-        Choice(name="The Sylvan Forest (South)", value="sylvanS"),
-        Choice(name="Julius Isle (North)", value="juliusN"),
-        Choice(name="Julius Isle (South)", value="juliusS"),
-        Choice(name="The Isle of Tauros", value="tauros"),
-    ])
-    @app_commands.describe(biome="A biome to search for a pokemon in. Mutually exclusive with route, city, and area.")
-    @app_commands.describe(city="A city to search for a pokemon in. Mutually exclusive with biome, route, and area.")
-    @app_commands.describe(area="An area to search for a pokemon in. Mutually exclusive with biome, city, and route.")
-    @app_commands.describe(route="A route to search for a pokemon in. Mutually exclusive with biome, city, and area.")
-    @app_commands.describe(level="Your trainer level, which determines the level of the pokemon you find.")
-    @app_commands.describe(rolls="The number of times to roll in the same route or biome. Defaults to 1.")
-    @app_commands.describe(advantage="True if you cannot find the same pokemon multiple times. Caps rolls at 10.")
-    @app_commands.describe(label="The label to declare for this command.")
+    @app_commands.choices(
+        biome=[
+            Choice(name="Abyssal Depths", value="depths"),
+            Choice(name="Badlands", value="badlands"),
+            Choice(name="Beach", value="beach"),
+            Choice(name="Caves", value="caves"),
+            Choice(name="City", value="city"),
+            Choice(name="Crags", value="crags"),
+            Choice(name="Desert", value="desert"),
+            Choice(name="Forest", value="forest"),
+            Choice(name="Glacier", value="glacier"),
+            Choice(name="Grasslands", value="grassland"),
+            Choice(name="Industrial", value="industrial"),
+            Choice(name="Jungle", value="jungle"),
+            Choice(name="Lake", value="lake"),
+            Choice(name="Ocean", value="ocean"),
+            Choice(name="Peaks", value="peaks"),
+            Choice(name="Polar Sea", value="polar"),
+            Choice(name="Ponds and Rivers", value="river"),
+            Choice(name="Ruins", value="ruins"),
+            Choice(name="The Safari Zone", value="safari"),
+            Choice(name="Swamp", value="swamp"),
+            Choice(name="Tundra", value="tundra"),
+            Choice(name="Volcano", value="volcano"),
+            Choice(name="Gift List (Off-Limits to Players)", value="_gift_list_")
+        ],
+        city=[
+            Choice(name="Athens", value="athens"),
+            Choice(name="Boread City", value="boread"),
+            Choice(name="Cyclopton", value="cyclopton"),
+            Choice(name="Dryad City", value="dryad"),
+            Choice(name="Eidolon City", value="eidolon"),
+            Choice(name="Harpyville", value="harpyville"),
+            Choice(name="Hydra City", value="hydra"),
+            Choice(name="Lamia Town", value="lamia"),
+            Choice(name="Manticore Town", value="manticore"),
+            Choice(name="Naiad Town", value="naiad"),
+            Choice(name="Rhodes", value="rhodes"),
+            Choice(name="Rome", value="rome"),
+            Choice(name="Sparta", value="sparta"),
+        ],
+        area=[
+            Choice(name="Mount Aetna", value="aetna"),
+            Choice(name="The Aegis Peaks", value="aegis"),
+            Choice(name="The Regi Mountains", value="regi"),
+            Choice(name="The Spear Peaks", value="spear"),
+            Choice(name="The August Swamp", value="august"),
+            Choice(name="The Crimson Bog", value="crimson"),
+            Choice(name="Golurk Bay", value="golurk"),
+            Choice(name="Selene Lake", value="selene"),
+            Choice(name="The Helios Desert", value="helios"),
+            Choice(name="The Haunted Jungle", value="haunted"),
+            Choice(name="The Sylvan Forest (North)", value="sylvanN"),
+            Choice(name="The Sylvan Forest (South)", value="sylvanS"),
+            Choice(name="Julius Isle (North)", value="juliusN"),
+            Choice(name="Julius Isle (South)", value="juliusS"),
+            Choice(name="The Isle of Tauros", value="tauros"),
+        ]
+    )
+    @app_commands.describe(
+        biome="A biome to search for a pokemon in. Mutually exclusive with route, city, and area.",
+        city="A city to search for a pokemon in. Mutually exclusive with biome, route, and area.",
+        area="An area to search for a pokemon in. Mutually exclusive with biome, city, and route.",
+        route="A route to search for a pokemon in. Mutually exclusive with biome, city, and area.",
+        level="Your trainer level, which determines the level of the pokemon you find.",
+        rolls="The number of times to roll in the same route or biome. Defaults to 1.",
+        advantage="True if you cannot find the same pokemon multiple times. Caps rolls at 10.",
+        label="The label to declare for this command."
+    )
     async def encounter(self, context, level: int, area: str = "", biome: str = "", city: str = "", route: int = 0, rolls: int = 1, advantage: bool = False, label: str = ""):
         checks = 0
         if area:
@@ -408,9 +421,10 @@ class PTU(commands.Cog):
         await context.send(printString.strip())
 
     @commands.hybrid_command(description="Roll to dowse for shards in PTU, using standard Dowsing Rod rules.")
-    @app_commands.describe(dice="The number of dice you roll when dowsing.")
-    @app_commands.describe(rolls="The number of dowsing attempts to make at once, to a max of 5")
-    @app_commands.describe(label="The label to declare for this command.")
+    @app_commands.describe(
+        dice="The number of dice you roll when dowsing.",
+        rolls="The number of dowsing attempts to make at once, to a max of 5",
+        label="The label to declare for this command.")
     async def dowse(self, context, dice: int, rolls: int = 1, label: str = ""):
         if rolls > 5:
             rolls = 5
@@ -479,11 +493,12 @@ class PTU(commands.Cog):
         return
 
     @commands.hybrid_command(description="Calculate how much experience a pokemon gains from one or more training session in PTU.")
-    @app_commands.describe(exp="Your pokemon's starting experience value.")
-    @app_commands.describe(skill_rank="The rank of the skill you use to train pokemon - typically Command.")
-    @app_commands.describe(bonus="Any other bonuses you can add to training experience.")
-    @app_commands.describe(sessions="The number of training sessions to apply at once.")
-    @app_commands.describe(label="The label to declare for this command.")
+    @app_commands.describe(
+        exp="Your pokemon's starting experience value.",
+        skill_rank="The rank of the skill you use to train pokemon - typically Command.",
+        bonus="Any other bonuses you can add to training experience.",
+        sessions="The number of training sessions to apply at once.",
+        label="The label to declare for this command.")
     async def train(self, context, exp: int, skill_rank: int, bonus: int = 0, sessions: int = 1, label: str = ""):
         report = ""
         if exp < 0:
