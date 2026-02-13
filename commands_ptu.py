@@ -352,11 +352,13 @@ class PTU(commands.Cog):
             await context.send("When you have advantage, you can only roll up to 5 times at once. Setting rolls to 10.")
         
         printString = label
+        printString += f"\nRolling on the {table} table..."
         
         found_list = []
         while len(found_list) < rolls:
             selection = weightedTable(table)
             if selection['pokemon'] in biome_table:
+                printString += f"\nRolling on the {selection['pokemon']} table..."
                 selection = weightedTable(biome_table[selection['pokemon']])
             if not advantage or not selection in found_list:
                 found_list.append(selection)
