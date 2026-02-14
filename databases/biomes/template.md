@@ -1,6 +1,8 @@
+# City Table Guideline
+
 Files should follow the following format, and *must* be saved as csv files.
 
-```
+```csv
 pokemon,tableweight,min_level,prevolution
 Charmander,3,0,n/a
 Charmeleon,2,15,Charmander
@@ -8,7 +10,7 @@ Charmeleon,2,15,Charmander
 
 Biome tables may only contain pokemon.
 
-When a pokemon is rolled, the `min_level` column is used to determine if the trainer is high enough level to catch it, based on the trainer level multiplier variable in `../../settings.py`. If the inputted trainer level times this multiplier matches or exceeds the value in `min_level`, the pokemon can be caught - otherwise, it will be downgraded into the pokemon listed in the `prevolution` column.
+When a pokemon is rolled, the `min_level` column is used to determine if the trainer is high enough level to catch it, based on the trainer level multiplier variable and underleveled pokemon adjustment variable found in in `../../settings.py`. If the inputted trainer level times this multiplier matches or exceeds the value in `min_level` minus the underleveled adjustment, the pokemon can be caught - otherwise, it will be downgraded into the pokemon listed in the `prevolution` column.
 
 The `tableweight` column determines how many chances there are to draw that specific entry. In the above example, there is a 1/6 chance of drawing the depths biome and selecting a pokemon from it according to its own weights; a 3/6 (or 1/2) chance of drawing a Charmander; and a 2/6 (1/3) chance of drawing a Charmeleon and checking the inputted trainer level to see if the trainer catches a Charmeleon or a Charmander.
 

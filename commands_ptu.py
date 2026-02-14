@@ -14,7 +14,7 @@ PTU_Dice = Dice()
 from ptu_reference_tables import db_table, get_level, next_level, random_nature
 from utilities_random_tables import weightedTable, load_files, buildTable
 from utilities_text import pluralize, aAn
-from settings import TRAINER_LEVEL_MULTIPLIER
+from settings import TRAINER_LEVEL_MULTIPLIER, UNDERLEVELED_POKEMON_ADJUSTMENT
 
 pickup_table = load_files("databases/pickup")
 biome_table = load_files("databases/biomes")
@@ -360,7 +360,7 @@ class PTU(commands.Cog):
             await context.send("You may only select a single biome, city, route, or named area to search for pokemon in.")
             return
         
-        level = max(5, level * TRAINER_LEVEL_MULTIPLIER)
+        level = max(5, int(level * TRAINER_LEVEL_MULTIPLIER))
 
         if rolls > 5 and advantage:
             await context.send("When you have advantage, you can only roll up to 5 times at once. Setting rolls to 5.")
@@ -385,7 +385,7 @@ class PTU(commands.Cog):
                 caught = found_list[i]
                 if i+1 == found_count:
                     printString += " and"
-                if level >= int(caught['min_level']):
+                if level >= (int(caught['min_level']) - UNDERLEVELED_POKEMON_ADJUSTMENT):
                     printString += (f" {aAn(random_nature())} {caught['pokemon']}")
                 else:
                     printString += (f" {aAn(random_nature())} {caught['prevolution']} (downgraded from {caught['pokemon']} due to level)")
@@ -395,7 +395,7 @@ class PTU(commands.Cog):
                     printString += f"! All pokemon found are level {level}."
         else:
             caught = found_list[0]
-            if level >= int(caught['min_level']):
+            if level >= (int(caught['min_level']) - UNDERLEVELED_POKEMON_ADJUSTMENT):
                 printString += (f" {aAn(random_nature())} {caught['pokemon']} at level {level}!")
             else:
                 printString += (f" {aAn(random_nature())} {caught['prevolution']} (downgraded from {caught['pokemon']} due to level) at level {level}!")
