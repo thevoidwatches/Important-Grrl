@@ -287,7 +287,7 @@ class PTU(commands.Cog):
             Choice(name="Swamp", value="swamp"),
             Choice(name="Tundra", value="tundra"),
             Choice(name="Volcano", value="volcano"),
-            Choice(name="Gift List (Off-Limits to Players)", value="_gift_list_")
+            Choice(name="Gift List (Off-Limits to Players)", value="gift")
         ],
         city=[
             Choice(name="Athens", value="athens"),
@@ -351,6 +351,8 @@ class PTU(commands.Cog):
                 return
             else:
                 table = route_table[route]
+        else:
+            route = ""
         if checks == 0:
             await context.send("You must select a biome, city, route, or named area to search for pokemon in.")
             return
@@ -361,16 +363,17 @@ class PTU(commands.Cog):
         level = max(5, level * TRAINER_LEVEL_MULTIPLIER)
 
         if rolls > 5 and advantage:
-            await context.send("When you have advantage, you can only roll up to 5 times at once. Setting rolls to 10.")
+            await context.send("When you have advantage, you can only roll up to 5 times at once. Setting rolls to 5.")
+            rolls = 5
         
         printString = label
-        printString += f"\nRolling on the {table} table..."
+        printString += f"\nRolling on the {area + biome + city + route} table..."
         
         found_list = []
         while len(found_list) < rolls:
             selection = weightedTable(table)
             if selection['pokemon'] in biome_table:
-                printString += f"\nRolling on the {selection['pokemon']} table..."
+                printString += f"\n    Rolling on the {selection['pokemon']} subtable..."
                 selection = weightedTable(biome_table[selection['pokemon']])
             if not advantage or not selection in found_list:
                 found_list.append(selection)
