@@ -1,34 +1,34 @@
 pokemon,tableweight,min_level,prevolution
 Abra,2,0,n/a
-Alolan Marowak,2,20,Cubone
+Alolan Marowak,2,25,Cubone
 Baltoy,3,0,n/a
 Beldum,2,0,n/a
-Braixen,2,10,Fennekin
-Bronzong,2,25,Bronzor
+Braixen,2,15,Fennekin
+Bronzong,2,30,Bronzor
 Bronzor,3,0,n/a
 Charcadet,3,0,n/a
 Cubone,4,0,n/a
 Darumaka,2,0,n/a
-Duosion,1,15,Solosis
+Duosion,1,20,Solosis
 Elgyem,3,0,n/a
-Espeon,2,20,Eevee
+Espeon,2,25,Eevee
 Fennekin,3,0,n/a
 Gastly,4,0,n/a
 Golett,3,0,n/a
-Haunter,3,15,Gastly
-Hisuian Zoroark,1,25,Zorua
+Haunter,3,20,Gastly
+Hisuian Zoroark,1,30,Zorua
 Hisuian Zorua,2,0,n/a
 Honedge,1,0,n/a
 Duelist's Honedge,1,0,n/a
 Spartan's Honedge,1,0,n/a
-Kadabra,2,10,Abra
-Kirlia,1,15,Ralts
-Lampent,2,15,Litwick
+Kadabra,2,15,Abra
+Kirlia,1,20,Ralts
+Lampent,2,20,Litwick
 Litwick,4,0,n/a
-Metang,1,15,Beldum
+Metang,1,20,Beldum
 Mimikyu,2,0,n/a
 Misdreavus,3,0,n/a
-Obliveon,2,20,Eevee
+Obliveon,2,25,Eevee
 Pawniard,4,0,n/a
 Phantump,3,0,n/a
 Poltchageist,2,0,n/a
@@ -38,8 +38,8 @@ Sinistea,2,0,n/a
 Solosis,2,0,n/a
 Spinarak,4,0,n/a
 Tangobra,3,0,n/a
-Umbreon,2,20,Eevee
+Umbreon,2,25,Eevee
 Vulpix,2,0,n/a
 Woobat,4,0,n/a
-Zoroark,1,25,Zorua
+Zoroark,1,30,Zorua
 Zorua,2,0,n/a

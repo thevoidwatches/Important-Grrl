@@ -1,9 +1,9 @@
 pokemon,tableweight,min_level,prevolution
 Alolan Grimer,6,0,n/a
 Beldum,2,0,n/a
-Carkol,4,15,Rolycoly
-Charjabug,4,15,Grubbin
-Croconaw,2,10,Totodile
+Carkol,4,20,Rolycoly
+Charjabug,4,20,Grubbin
+Croconaw,2,15,Totodile
 Ditto,1,0,n/a
 Grubbin,8,0,n/a
 Heleoptile,6,0,n/a

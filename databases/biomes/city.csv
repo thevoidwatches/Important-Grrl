@@ -2,7 +2,7 @@ pokemon,tableweight,min_level,prevolution
 Alolan Meowth,3,0,n/a
 Alolan Rattata,6,0,n/a
 Chatot,3,0,n/a
-Companeon,1,20,Eevee
+Companeon,1,25,Eevee
 Cutiefly,3,0,n/a
 Eevee,5,0,n/a
 Fidough,5,0,n/a
@@ -29,7 +29,7 @@ Sinistea,1,0,n/a
 Skitty,5,0,n/a
 Smeargle,3,0,n/a
 Sprigatito,2,0,n/a
-Sylveon,1,20,Eevee
+Sylveon,1,25,Eevee
 Totodile,2,0,n/a
 Trubbish,4,0,n/a
 Zorua,2,0,n/a

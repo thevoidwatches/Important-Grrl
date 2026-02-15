@@ -1,47 +1,47 @@
 pokemon,tableweight,min_level,prevolution
-Abomasnow,2,25,Snover
+Abomasnow,2,30,Snover
 Absol,3,0,n/a
-Alolan Ninetales,1,20,Alolan Vulpix
+Alolan Ninetales,1,25,Alolan Vulpix
 Alolan Vulpix,1,0,n/a
-Armarouge,1,20,Charcadet
+Armarouge,1,25,Charcadet
 Aron,4,0,n/a
-Beheeyem,1,25,Elgyem
-Ceruledge,1,20,Charcadet
-Cetitan,2,20,Cetoddle
+Beheeyem,1,30,Elgyem
+Ceruledge,1,25,Charcadet
+Cetitan,2,25,Cetoddle
 Charcadet,2,0,n/a
-Corvisquire,2,10,Rookidee
+Corvisquire,2,15,Rookidee
 Rookidee,4,0,n/a
 Deino,4,0,n/a
 Elgyem,2,0,n/a
-Fraxure,3,15,Axew
-Frosmoth,2,15,Snom
-Galarian Darmanitan,2,25,Darumaka
+Fraxure,3,20,Axew
+Frosmoth,2,20,Snom
+Galarian Darmanitan,2,30,Darumaka
 Nacli,2,0,n/a
-Naclstack,1,20,Nacli
-Hisuian Avalugg,2,25,Bergmite
-Hisuian Braviary,2,10,Rufflet
-Hitmonchan,2,15,Tyrogue
-Hitmonlee,2,15,Tyrogue
-Hitmontop,2,15,Tyrogue
-Kazeon,2,20,Eevee
-Lairon,2,25,Aron
-Lucario,2,20,Riolu
+Naclstack,1,25,Nacli
+Hisuian Avalugg,2,30,Bergmite
+Hisuian Braviary,2,35,Rufflet
+Hitmonchan,2,20,Tyrogue
+Hitmonlee,2,20,Tyrogue
+Hitmontop,2,20,Tyrogue
+Kazeon,2,25,Eevee
+Lairon,2,30,Aron
+Lucario,2,25,Riolu
 Mankey,4,0,n/a
-Mienshao,1,25,Mienfoo
+Mienshao,1,30,Mienfoo
 Mienfoo,2,0,n/a
 Noibat,4,0,n/a
 Noivern,2,25,Noibat
-Olympian Machoke,2,15,Olympian Machop
+Olympian Machoke,2,20,Olympian Machop
 Pancham,2,0,n/a
-Pangoro,1,25,Pancham
-Primeape,2,20,Mankey
+Pangoro,1,30,Pancham
+Primeape,2,25,Mankey
 Rufflet,3,0,n/a
 Sneasel,2,0,n/a
 Hisuian Sneasel,2,0,n/a
-Sneasler,2,25,Hisuian Sneasel
+Sneasler,2,30,Hisuian Sneasel
 Snom,4,0,n/a
 Snover,4,0,n/a
-Tinkatuff,1,20,Tinkatink
+Tinkatuff,1,25,Tinkatink
 Tinkatink,2,0,n/a
-Weavile,2,25,Sneasel
-Zweilous,2,15,Deino
+Weavile,2,30,Sneasel
+Zweilous,2,20,Deino

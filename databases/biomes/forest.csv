@@ -1,6 +1,6 @@
 pokemon,tableweight,min_level,prevolution
 Applin,2,0,n/a
-Bewear,1,20,Stufful
+Bewear,1,50,Stufful
 Budew,2,0,n/a
 Bulbasaur,1,0,n/a
 Cascoon,3,0,n/a
@@ -14,16 +14,16 @@ Foongus,3,0,n/a
 Galarian Ponyta,1,0,n/a
 Grooky,1,0,n/a
 Hoothoot,3,0,n/a
-Noctowl,2,15,Hoothoot
+Noctowl,2,20,Hoothoot
 Mimikyu,1,0,n/a
 Morelull,3,0,n/a
 Munchlax,1,0,n/a
 Pancham,4,0,n/a
 Pichu,1,0,n/a
-Pikachu,1,5,Pichu
+Pikachu,1,10,Pichu
 Pikipek,4,0,n/a
 Rattata,4,0,n/a
-Roselia,3,15,n/a
+Roselia,3,20,n/a
 Rowlet,1,0,n/a
 Scyther,2,0,n/a
 Sentret,4,0,n/a
@@ -32,12 +32,12 @@ Shroomish,4,0,n/a
 Silcoon,3,0,n/a
 Solosis,2,0,n/a
 Stufful,2,0,n/a
-Swadloon,3,10,Sewaddle
+Swadloon,3,15,Sewaddle
 Tailow,4,0,n/a
 Teddiursa,2,0,n/a
 Toedscool,4,0,n/a
 Treecko,1,0,n/a
-Ursaring,1,25,Teddiursa
+Ursaring,1,30,Teddiursa
 Vulpix,1,0,n/a
 Wurmple,6,0,n/a
 Zorua,1,0,n/a

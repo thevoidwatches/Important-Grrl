@@ -3,5 +3,5 @@ grassland,40,0,n/a
 river,30,0,n/a
 crags,20,0,n/a
 Scatterbug,5,0,n/a
-Spewpa,3,0,n/a
-Vivillon,2,5,Scatterbug
+Spewpa,3,5,Scatterbug
+Vivillon,2,10,Scatterbug
