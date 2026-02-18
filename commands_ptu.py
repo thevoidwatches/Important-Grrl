@@ -198,41 +198,41 @@ class PTU(commands.Cog):
             match randRoll:
                 case 1 | 2 | 3 | 4 | 5:
                     found = {"itemname": "None", "tableweight": 0, "sell price": "0"}
-                    if not advantage or not found in foundItems:
+                    if not advantage or not (found in foundItems):
                         foundItems.append(found)
                 case 6 | 7:
                     found = weightedTable(pickup_table['x_items'])
-                    if not advantage or not found in foundItems:
+                    if not advantage or not (found in foundItems):
                         foundItems.append(found)
                 case 8 | 9 | 10:
                     found = weightedTable(pickup_table['berries'])
-                    if not advantage or not found in foundItems:
+                    if not advantage or not (found in foundItems):
                         foundItems.append(found)
                 case 11 | 12 | 13:
                     found = weightedTable(pickup_table['pokeballs'])
-                    if not advantage or not found in foundItems:
+                    if not advantage or not (found in foundItems):
                         foundItems.append(found)
-                case 14 | 15 | 16 | 17:
+                case 14 | 15 | 16:
                     found = weightedTable(pickup_table['healing_items'])
-                    if not advantage or not found in foundItems:
+                    if not advantage or not (found in foundItems):
                         foundItems.append(found)
                 case 17:
                     found = weightedTable(pickup_table['keepsakes'])
-                    if not advantage or not found in foundItems:
+                    if not advantage or not (found in foundItems):
                         foundItems.append(found)
                 case 18:
                     found = weightedTable(pickup_table['vitamins'])
                     if found['itemname'] == "Mint": 
                         found['itemname'] = f"{random_nature()} Mint"
-                    if not advantage or not found in foundItems:
+                    if not advantage or not (found in foundItems):
                         foundItems.append(found)
                 case 19:
                     found = weightedTable(pickup_table['held_items'])
-                    if not advantage or not found in foundItems:
+                    if not advantage or not (found in foundItems):
                         foundItems.append(found)
                 case 20:
                     found = weightedTable(pickup_table['tms'])
-                    if not advantage or not found in foundItems:
+                    if not advantage or not (found in foundItems):
                         foundItems.append(found)
 
         printString = label
@@ -490,7 +490,7 @@ class PTU(commands.Cog):
             if blue:
                 printString += f"\n- {blue} blue {pluralize(blue,"shard")}"
             if violet:
-                printString += f"\n- {violet} yellow {pluralize(violet,"shard")}"
+                printString += f"\n- {violet} violet {pluralize(violet,"shard")}"
 
         await context.send(printString.strip())
         return
@@ -520,7 +520,7 @@ class PTU(commands.Cog):
                 await context.send("Your training skill rank must be a legal value (1-6, or 8).")
                 return
         if bonus < 0:
-            exp = 0
+            bonus = 0
             report += "\nYou cannot have a penalty to your training experience. Setting bonus to 0."
         
         if report:
