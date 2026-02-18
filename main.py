@@ -3,13 +3,10 @@ from discord.ext import commands
 
 #connection to discord
 try:
-    intents = discord.Intents.default()
-    intents.message_content = True
-    #to use regular commands still, use a command_prefix
-    bot = commands.Bot(command_prefix='', intents=intents)
-except:
-    print("The Important Girl couldn't connect to Discord.")
-    quit()
+intents = discord.Intents.default()
+intents.message_content = True
+#to use regular commands still, use a command_prefix
+bot = commands.Bot(command_prefix='', intents=intents)
 
 #load cogs for commands/slash commands
 @bot.event

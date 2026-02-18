@@ -9,7 +9,7 @@ def pluralize(numeral: int, word: str, pluralword: str = ""):
     
 # Simple function 
 def aAn(word: str, capital: bool = False):
-    vowels = ["a", "e", "i", "o", "y", "A", "E", "I", "O", "U"]
+    vowels = ["a", "e", "i", "o", "u", "A", "E", "I", "O", "U"]
     if capital:
         a = "A"
         an = "An"
