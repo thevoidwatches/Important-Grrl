@@ -64,7 +64,7 @@ class Dice(commands.Cog):
 
         printString = label
 
-        printString = f"\nRolling {dice}d{sides}{bonusPrint}"
+        printString += f"\nRolling {dice}d{sides}{bonusPrint}"
         if rolls > 1:
             printString += f", {rolls} times"
         if explode > 0:
@@ -127,7 +127,7 @@ class Dice(commands.Cog):
                     linesSkipped += 1
                 else:
                     if linesSkipped:
-                        printString += f"\nTrimming {pluralize(linesSkipped), "line"} to conserve message length..."
+                        printString += f"\nTrimming {pluralize(linesSkipped, "line")} to conserve message length..."
                         linesSkipped = 0
                     printString += f"\n{line}"
         if len(printString) > 2000:

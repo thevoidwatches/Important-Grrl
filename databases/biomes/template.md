@@ -19,3 +19,5 @@ The number of pokemon available in a biome is your own personal preference, but 
 **Note that when constructing your own biome tables, you *must* edit lines 252-274 of the `commands_ptu.py` file in the top-level folder.** Each `Choice()` in these lines should correspond to one of the .csv files in this folder, with `name` being what players will see when using the command and `value` being the name of the file, without the `.csv` prefix.
 
 Additionally, please note that due to limitations inherent in Discord's slash commands, you may only have a maximum of 25 biomes.
+
+The example biomes in this folder are constructed such that every non-legendary pokemon is available in the habitats listed in their PTU pokedex entry. First evolutions are given higher weights than second evolutions, and final evolutions are given a weight of 0. Each pokemon line has the same total weight as every other line in that biome.

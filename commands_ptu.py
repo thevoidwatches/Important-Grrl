@@ -7,14 +7,15 @@ from discord.ext import commands
 import random
 import math
 from commands_dicebot import Dice, basicHelp, diceHelp
+import re
 
 PTU_Dice = Dice()
 
 #imports for specific system functionality
-from ptu_reference_tables import db_table, get_level, next_level, random_nature
+from reference_tables_ptu import db_table, get_level, next_level, random_nature, random_type
 from utilities_random_tables import weightedTable, load_files, buildTable
 from utilities_text import pluralize, aAn
-from settings import TRAINER_LEVEL_MULTIPLIER, UNDERLEVELED_POKEMON_ADJUSTMENT
+from settings import TRAINER_LEVEL_MULTIPLIER, UNDERLEVELED_POKEMON_ADJUSTMENT, REGION_NAME
 
 pickup_table = load_files("databases/pickup")
 biome_table = load_files("databases/biomes")
@@ -34,7 +35,9 @@ ptuHelp = """
     `/dowse` will automatically find use a dowsing rod.
     `/train` will calculate how much experience a pokemon has after one or more training sessions.
     `/metronome` will randomly select a move to use from Metronome (not yet implemented)
-    `/nature` will randomly generate a Nature."""
+    `/nature` will randomly generate one of the 36 Natures.
+    `/type` will randomly generate one of the 18 Types
+    `/region`, alias `/version`, will report the name of the region that the bot is customized for."""
 
 class PTU(commands.Cog):
     @commands.hybrid_command(description="Roll 1-6 d6s for a PTU skill roll, plus a bonus of 0-10.")
@@ -60,11 +63,12 @@ class PTU(commands.Cog):
     @app_commands.describe(
         db="The Damage Base of the attack.",
         bonus="Your Attack or Special Attack.",
-        crit="True only if you rolled a critical hit.",
+        crit="True if you rolled a critical hit.",
         flat="Set as true to use the set damage for a given Damage Base, instead of rolling.",
+        misc_bonus="Extra damage bonuses from abilities, items, etc. Accepts formats like '1d6+2', '1d10', or '5'.",
         label="The label to declare for this command."
     )
-    async def damage(self, context, db: int, bonus: int, crit: bool = False, flat: bool = False, label: str = ""):
+    async def damage(self, context, db: int, bonus: int, crit: bool = False, flat: bool = False, misc_bonus: str = "", label: str = ""):
         # Loads in the damage base information.
         report = ""
         if db < 1 or db > 24:
@@ -81,6 +85,33 @@ class PTU(commands.Cog):
         if bonus < 0:
             report += "\nAttack and Special Attack cannot be negative. Adjusting to a bonus of 0."
             bonus = 0
+
+        misc_total = 0
+        misc_label = ""
+        if misc_bonus:
+            tokens = misc_bonus.replace(" ", "").split("+")
+            valid = True
+            for token in tokens:
+                dice_match = re.fullmatch(r'(\d+)d(\d+)', token)
+                if dice_match:
+                    misc_dice = int(dice_match.group(1))
+                    misc_sides = int(dice_match.group(2))
+                    rolls = 0
+                    for _ in range(misc_dice):
+                        roll = random.randint(1, misc_sides)
+                        rolls += roll
+                    misc_total += rolls
+                    misc_label += f"+{rolls}"
+                elif token.isdigit():
+                    misc_total += int(token)
+                    misc_label += f"+{token}"
+                else:
+                    valid = False
+                    break
+            if not valid:
+                misc_label = ""
+                misc_total = 0
+                report += "\nMisc bonus must be made up of 'XdY' and/or flat number terms separated by '+'. Ignoring misc bonus."
 
         if report:
             await context.send(report.strip())
@@ -100,6 +131,8 @@ class PTU(commands.Cog):
             damage = db_flat
         else:
             printString += f"\nRolling {dice}d{sides}+{db_bonus}+{bonus}"
+            if misc_label:
+                printString += f"+{misc_bonus.replace(" ","")}"
             if crit:
                 printString += " thanks to a critical hit!"
             damage = 0
@@ -107,7 +140,8 @@ class PTU(commands.Cog):
                 damage += random.randint(1, sides)
             printString += f"\nRolled {damage}+{db_bonus}"
             damage += db_bonus
-        printString += f"+{bonus}, for a total of **{damage + bonus}!**"
+        printString += f"+{bonus}{misc_label}"
+        printString += f", for a total of **{damage + bonus + misc_total}!**"
 
         await context.send(printString.strip())
 
@@ -198,41 +232,41 @@ class PTU(commands.Cog):
             match randRoll:
                 case 1 | 2 | 3 | 4 | 5:
                     found = {"itemname": "None", "tableweight": 0, "sell price": "0"}
-                    if not advantage or not found in foundItems:
+                    if not advantage or not (found in foundItems):
                         foundItems.append(found)
                 case 6 | 7:
                     found = weightedTable(pickup_table['x_items'])
-                    if not advantage or not found in foundItems:
+                    if not advantage or not (found in foundItems):
                         foundItems.append(found)
                 case 8 | 9 | 10:
                     found = weightedTable(pickup_table['berries'])
-                    if not advantage or not found in foundItems:
+                    if not advantage or not (found in foundItems):
                         foundItems.append(found)
                 case 11 | 12 | 13:
                     found = weightedTable(pickup_table['pokeballs'])
-                    if not advantage or not found in foundItems:
+                    if not advantage or not (found in foundItems):
                         foundItems.append(found)
-                case 14 | 15 | 16 | 17:
+                case 14 | 15 | 16:
                     found = weightedTable(pickup_table['healing_items'])
-                    if not advantage or not found in foundItems:
+                    if not advantage or not (found in foundItems):
                         foundItems.append(found)
                 case 17:
                     found = weightedTable(pickup_table['keepsakes'])
-                    if not advantage or not found in foundItems:
+                    if not advantage or not (found in foundItems):
                         foundItems.append(found)
                 case 18:
                     found = weightedTable(pickup_table['vitamins'])
                     if found['itemname'] == "Mint": 
                         found['itemname'] = f"{random_nature()} Mint"
-                    if not advantage or not found in foundItems:
+                    if not advantage or not (found in foundItems):
                         foundItems.append(found)
                 case 19:
                     found = weightedTable(pickup_table['held_items'])
-                    if not advantage or not found in foundItems:
+                    if not advantage or not (found in foundItems):
                         foundItems.append(found)
                 case 20:
                     found = weightedTable(pickup_table['tms'])
-                    if not advantage or not found in foundItems:
+                    if not advantage or not (found in foundItems):
                         foundItems.append(found)
 
         printString = label
@@ -490,7 +524,7 @@ class PTU(commands.Cog):
             if blue:
                 printString += f"\n- {blue} blue {pluralize(blue,"shard")}"
             if violet:
-                printString += f"\n- {violet} yellow {pluralize(violet,"shard")}"
+                printString += f"\n- {violet} violet {pluralize(violet,"shard")}"
 
         await context.send(printString.strip())
         return
@@ -520,7 +554,7 @@ class PTU(commands.Cog):
                 await context.send("Your training skill rank must be a legal value (1-6, or 8).")
                 return
         if bonus < 0:
-            exp = 0
+            bonus = 0
             report += "\nYou cannot have a penalty to your training experience. Setting bonus to 0."
         
         if report:
@@ -558,6 +592,16 @@ class PTU(commands.Cog):
     @commands.hybrid_command(description="Randomly generate one of the 36 natures in PTU.")
     async def nature(self, context):
         printString = f"Random nature: {random_nature()}"
+        await context.send(printString)
+
+    @commands.hybrid_command(description="Randomly generate one of the 18 types in PTU.")
+    async def type(self, context):
+        printString = f"Random type: {random_type()}"
+        await context.send(printString)
+
+    @commands.hybrid_command(description="Tells you the name of the region whos settings are being used.", aliases=["version"])
+    async def region(self, context):
+        printString = f"This iteration of the Important Grrl is generating from the {REGION_NAME} Region."
         await context.send(printString)
 
     @commands.hybrid_command(description="See a list of available commands for this bot.")
