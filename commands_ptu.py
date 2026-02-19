@@ -7,6 +7,7 @@ from discord.ext import commands
 import random
 import math
 from commands_dicebot import Dice, basicHelp, diceHelp
+import re
 
 PTU_Dice = Dice()
 
@@ -62,9 +63,10 @@ class PTU(commands.Cog):
         bonus="Your Attack or Special Attack.",
         crit="True if you rolled a critical hit.",
         flat="Set as true to use the set damage for a given Damage Base, instead of rolling.",
+        misc_bonus="Extra damage bonuses from abilities, items, etc. Accepts formats like '1d6+2', '1d10', or '5'.",
         label="The label to declare for this command."
     )
-    async def damage(self, context, db: int, bonus: int, crit: bool = False, flat: bool = False, label: str = ""):
+    async def damage(self, context, db: int, bonus: int, crit: bool = False, flat: bool = False, misc_bonus: str = "", label: str = ""):
         # Loads in the damage base information.
         report = ""
         if db < 1 or db > 24:
@@ -81,6 +83,33 @@ class PTU(commands.Cog):
         if bonus < 0:
             report += "\nAttack and Special Attack cannot be negative. Adjusting to a bonus of 0."
             bonus = 0
+
+        misc_total = 0
+        misc_label = ""
+        if misc_bonus:
+            tokens = misc_bonus.replace(" ", "").split("+")
+            valid = True
+            for token in tokens:
+                dice_match = re.fullmatch(r'(\d+)d(\d+)', token)
+                if dice_match:
+                    misc_dice = int(dice_match.group(1))
+                    misc_sides = int(dice_match.group(2))
+                    rolls = 0
+                    for _ in range(misc_dice):
+                        roll = random.randint(1, misc_sides)
+                        rolls += roll
+                    misc_total += rolls
+                    misc_label += f"+{rolls}"
+                elif token.isdigit():
+                    misc_total += int(token)
+                    misc_label += f"+{token}"
+                else:
+                    valid = False
+                    break
+            if not valid:
+                misc_label = ""
+                misc_total = 0
+                report += "\nMisc bonus must be made up of 'XdY' and/or flat number terms separated by '+'. Ignoring misc bonus."
 
         if report:
             await context.send(report.strip())
@@ -100,6 +129,8 @@ class PTU(commands.Cog):
             damage = db_flat
         else:
             printString += f"\nRolling {dice}d{sides}+{db_bonus}+{bonus}"
+            if misc_label:
+                printString += f"+{misc_bonus.replace(" ","")}"
             if crit:
                 printString += " thanks to a critical hit!"
             damage = 0
@@ -107,7 +138,8 @@ class PTU(commands.Cog):
                 damage += random.randint(1, sides)
             printString += f"\nRolled {damage}+{db_bonus}"
             damage += db_bonus
-        printString += f"+{bonus}, for a total of **{damage + bonus}!**"
+        printString += f"+{bonus}{misc_label}"
+        printString += f", for a total of **{damage + bonus + misc_total}!**"
 
         await context.send(printString.strip())
 
