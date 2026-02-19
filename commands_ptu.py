@@ -15,7 +15,7 @@ PTU_Dice = Dice()
 from reference_tables_ptu import db_table, get_level, next_level, random_nature, random_type
 from utilities_random_tables import weightedTable, load_files, buildTable
 from utilities_text import pluralize, aAn
-from settings import TRAINER_LEVEL_MULTIPLIER, UNDERLEVELED_POKEMON_ADJUSTMENT
+from settings import TRAINER_LEVEL_MULTIPLIER, UNDERLEVELED_POKEMON_ADJUSTMENT, REGION_NAME
 
 pickup_table = load_files("databases/pickup")
 biome_table = load_files("databases/biomes")
@@ -35,7 +35,9 @@ ptuHelp = """
     `/dowse` will automatically find use a dowsing rod.
     `/train` will calculate how much experience a pokemon has after one or more training sessions.
     `/metronome` will randomly select a move to use from Metronome (not yet implemented)
-    `/nature` will randomly generate a Nature."""
+    `/nature` will randomly generate one of the 36 Natures.
+    `/type` will randomly generate one of the 18 Types
+    `/region`, alias `/version`, will report the name of the region that the bot is customized for."""
 
 class PTU(commands.Cog):
     @commands.hybrid_command(description="Roll 1-6 d6s for a PTU skill roll, plus a bonus of 0-10.")
@@ -595,6 +597,11 @@ class PTU(commands.Cog):
     @commands.hybrid_command(description="Randomly generate one of the 18 types in PTU.")
     async def type(self, context):
         printString = f"Random type: {random_type()}"
+        await context.send(printString)
+
+    @commands.hybrid_command(description="Tells you the name of the region whos settings are being used.", aliases=["version"])
+    async def region(self, context):
+        printString = f"This iteration of the Important Grrl is generating from the {REGION_NAME} Region."
         await context.send(printString)
 
     @commands.hybrid_command(description="See a list of available commands for this bot.")

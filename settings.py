@@ -6,3 +6,6 @@ TRAINER_LEVEL_MULTIPLIER = 2
 # When using the /encounter command, second-stage pokemon can be found. Their minimum level to evolve to that pokemon will have this number subtracted from it prior to being compared to the level that the pokemon is being caught at, before determining if they should be downgraded or not.
 # Essentially, you may catch or generate wild pokemon who have evolved early, by up to this number of levels.
 UNDERLEVELED_POKEMON_ADJUSTMENT = 5
+
+# Name this variable the same thing as your custom region.
+REGION_NAME = "Olympia"
