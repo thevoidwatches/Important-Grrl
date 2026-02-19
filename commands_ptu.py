@@ -11,7 +11,7 @@ from commands_dicebot import Dice, basicHelp, diceHelp
 PTU_Dice = Dice()
 
 #imports for specific system functionality
-from ptu_reference_tables import db_table, get_level, next_level, random_nature
+from reference_tables_ptu import db_table, get_level, next_level, random_nature, random_type
 from utilities_random_tables import weightedTable, load_files, buildTable
 from utilities_text import pluralize, aAn
 from settings import TRAINER_LEVEL_MULTIPLIER, UNDERLEVELED_POKEMON_ADJUSTMENT
@@ -60,7 +60,7 @@ class PTU(commands.Cog):
     @app_commands.describe(
         db="The Damage Base of the attack.",
         bonus="Your Attack or Special Attack.",
-        crit="True only if you rolled a critical hit.",
+        crit="True if you rolled a critical hit.",
         flat="Set as true to use the set damage for a given Damage Base, instead of rolling.",
         label="The label to declare for this command."
     )
@@ -558,6 +558,11 @@ class PTU(commands.Cog):
     @commands.hybrid_command(description="Randomly generate one of the 36 natures in PTU.")
     async def nature(self, context):
         printString = f"Random nature: {random_nature()}"
+        await context.send(printString)
+
+    @commands.hybrid_command(description="Randomly generate one of the 18 types in PTU.")
+    async def type(self, context):
+        printString = f"Random type: {random_type()}"
         await context.send(printString)
 
     @commands.hybrid_command(description="See a list of available commands for this bot.")

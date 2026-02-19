@@ -174,3 +174,8 @@ def random_nature():
     raised = random.randint(0,5)
     lowered = random.randint(0,5)
     return nature_table[raised][lowered]
+
+type_table = ["Normal", "Fire", "Water", "Electric", "Grass", "Ice", "Fight", "Poison", "Ground", "Flying", "Psychic", "Bug", "Rock", "Ghost", "Dragon", "Steel", "Dark", "Fairy"]
+
+def random_type():
+    return random.choice(type_table)
