@@ -12,6 +12,7 @@ Recognizes the following commands:
     /kill will close the bot. The bot will attempt to restart every 60 seconds.
     /reset, alias /seed, will reset the bot's random number generator by choosing a new seed.
     /dice, alias /roll, allows you to roll any number of dice of any size, applying a bonus if you choose to and rolling the specified set of dice any number of times.
+    /attack will roll a d20, subtracting an AC penalty you input.
     /skill will roll a number of d6s, optionally with a bonus added on afterwards.
     /damage will roll damage for an attack using a specified damage base.
     /block will calculate damage dealt, applying an inputted defense stat and optional damage reduction and type effectiveness. It can optionally also calculate remaining HP, given your current HP.

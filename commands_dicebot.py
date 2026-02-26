@@ -21,7 +21,7 @@ class Utility(commands.Cog):
     async def ping(self, context):
         await context.send(f'Pong!\nLatency: {round(self.bot.latency * 1000)}ms')
 
-    @commands.command(alias=["close"], description="Kills the running instance of the bot so it can restart.")
+    @commands.hybrid_command(aliases=["close"], description="Kills the running instance of the bot so it can restart.")
     async def kill(self, context):
         await context.send("`Closing the Important Grrl. The grrl will attempt to restart in one minute.`")
         quit()

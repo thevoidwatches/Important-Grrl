@@ -27,6 +27,7 @@ metronome_table = buildTable("databases/metronome.csv")
 
 ptuHelp = """
     `/skill` will roll a number of d6s, optionally with a bonus added on afterwards.
+    `/attack` will roll a d20, minus an inputted AC.
     `/damage` will roll damage for an attack using a specified damage base.
     `/block` will calculate damage dealt, applying an inputted defense stat and optional damage reduction and type effectiveness. It can optionally also calculate remaining HP, given your current HP.
     `/scavenge`, alias `/pickup`, will roll one or more times on the Pickup table. If the Advantage option is used, it will not roll the same thing multiple times.
@@ -57,7 +58,15 @@ class PTU(commands.Cog):
             bonus = min(10, bonus)
         if report:
             await context.send(report.strip())
-        await PTU_Dice.dice(self, context, dice=rank, sides=6, bonus=bonus, label=label)
+        await PTU_Dice.dice(context, dice=rank, sides=6, bonus=bonus, label=label)
+
+    @commands.hybrid_command(description="Roll 1d20 minus an inputted AC for a PTU attack roll")
+    @app_commands.describe(
+        ac="The Attack Check penalty applied to the roll. Is subtracted from your roll.",
+        label="The label to declare for this command."
+    )
+    async def attack(self, context, ac: int, label: str = ""):
+        await PTU_Dice.dice(context, bonus=(ac * -1), label=label)
 
     @commands.hybrid_command(description="Roll damage for an attack in PTU.")
     @app_commands.describe(
@@ -148,7 +157,7 @@ class PTU(commands.Cog):
     @commands.hybrid_command(description="Calculate damage recieved from an attack in PTU.")
     @app_commands.describe(
         damage="The damage rolled from the attack by using the /damage command.", defense="Your Defense or Special Defense.",
-        effectiveness="An effectiveness multiplier derived from typing, defaulting to 0. Input as a decimal number.",
+        effectiveness="An effectiveness multiplier derived from typing, defaulting to 1. Input as a decimal number.",
         damage_reduction="Your Damage Reduction, if you have any. Defaults to 0",
         hp="Your current HP, to automatically calculate your remaining HP after applying the given damage",
         label="The label to declare for this command."
