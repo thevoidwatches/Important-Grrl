@@ -7,6 +7,10 @@ intents.message_content = True
 #to use regular commands still, use a command_prefix
 bot = commands.Bot(command_prefix='', intents=intents)
 
+@bot.event
+async def setup_hook():
+    await bot.tree.sync()
+
 #load cogs for commands/slash commands
 @bot.event
 async def on_ready():
