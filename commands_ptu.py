@@ -58,7 +58,7 @@ class PTU(commands.Cog):
             bonus = min(10, bonus)
         if report:
             await context.send(report.strip())
-        await PTU_Dice.dice(context, dice=rank, sides=6, bonus=bonus, label=label)
+        await PTU_Dice.dice(self, context, dice=rank, sides=6, bonus=bonus, label=label)
 
     @commands.hybrid_command(description="Roll 1d20 minus an inputted AC for a PTU attack roll")
     @app_commands.describe(
@@ -66,7 +66,7 @@ class PTU(commands.Cog):
         label="The label to declare for this command."
     )
     async def attack(self, context, ac: int, label: str = ""):
-        await PTU_Dice.dice(context, bonus=(ac * -1), label=label)
+        await PTU_Dice.dice(self, context, bonus=(ac * -1), label=label)
 
     @commands.hybrid_command(description="Roll damage for an attack in PTU.")
     @app_commands.describe(
