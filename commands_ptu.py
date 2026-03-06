@@ -63,10 +63,12 @@ class PTU(commands.Cog):
     @commands.hybrid_command(description="Roll 1d20 minus an inputted AC for a PTU attack roll")
     @app_commands.describe(
         ac="The Attack Check penalty applied to the roll. Is subtracted from your roll.",
+        mod="Any other miscellaneous bonuses or penalties. Is added to your roll.",
+        rolls="The number of separate attack rolls to make.",
         label="The label to declare for this command."
     )
-    async def attack(self, context, ac: int, label: str = ""):
-        await PTU_Dice.dice(self, context, bonus=(ac * -1), label=label)
+    async def attack(self, context, ac: int, mod: int = 0, rolls: int = 0, label: str = ""):
+        await PTU_Dice.dice(self, context, bonus=(ac * -1 + mod), rolls=rolls, label=label)
 
     @commands.hybrid_command(description="Roll damage for an attack in PTU.")
     @app_commands.describe(
