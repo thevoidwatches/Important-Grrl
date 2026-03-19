@@ -192,7 +192,9 @@ class PTU(commands.Cog):
 
         result = max(1, damage - defense) #defense stats can't reduce below 1
         result = max(0, result - damage_reduction) #damage reduction CAN
-        result = math.ceil(result * effectiveness) #always round up effectiveness
+        result = result * effectiveness
+        if 0 < result < 1: result = math.ceil(result) #results below 1 but above 0 round up to 1
+        else: result = math.floor(result) #all others round up down
 
         printString = label
 
