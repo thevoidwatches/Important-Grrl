@@ -303,7 +303,7 @@ class PTU(commands.Cog):
 
         if "None" in foundDict:
             found = foundDict["None"][0]
-            printString += f"{found} {pluralize(found,"time")}, you found nothing."
+            printString += f"\n{found} {pluralize(found,"time")}, you found nothing."
 
         if len(printString) > 2000:
             printString = "The final message was too long. Please try again, making fewer scavenge rolls at once."
