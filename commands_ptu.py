@@ -52,9 +52,9 @@ class PTU(commands.Cog):
             report += "Rank must be within 1 and 6. Adjusting to within that range."
             rank = max(1, rank)
             rank = min(6, rank)
-        if bonus < 0 or bonus > 10:
-            report += "\nBonus must be within 0 and 10. Adjusting to within that range."
-            bonus = max(0, bonus)
+        if bonus < -10 or bonus > 10:
+            report += "\nBonus must be within -10 and 10. Adjusting to within that range."
+            bonus = max(-10, bonus)
             bonus = min(10, bonus)
         if report:
             await context.send(report.strip())
@@ -100,29 +100,33 @@ class PTU(commands.Cog):
         misc_total = 0
         misc_label = ""
         if misc_bonus:
-            tokens = misc_bonus.replace(" ", "").split("+")
+            normalized = misc_bonus.replace(" ", "").replace("-", "+-")
+            tokens = [t for t in normalized.split("+") if t]
             valid = True
             for token in tokens:
-                dice_match = re.fullmatch(r'(\d+)d(\d+)', token)
+                dice_match = re.fullmatch(r'(-?)(\d+)d(\d+)', token)
                 if dice_match:
-                    misc_dice = int(dice_match.group(1))
-                    misc_sides = int(dice_match.group(2))
+                    sign = -1 if dice_match.group(1) == '-' else 1
+                    misc_dice = int(dice_match.group(2))
+                    misc_sides = int(dice_match.group(3))
                     rolls = 0
                     for _ in range(misc_dice):
                         roll = random.randint(1, misc_sides)
                         rolls += roll
+                    rolls *= sign
                     misc_total += rolls
-                    misc_label += f"+{rolls}"
-                elif token.isdigit():
-                    misc_total += int(token)
-                    misc_label += f"+{token}"
+                    misc_label += f"{rolls:+d}"
+                elif re.fullmatch(r'-?\d+', token):
+                    value = int(token)
+                    misc_total += value
+                    misc_label += f"{value:+d}"
                 else:
                     valid = False
                     break
             if not valid:
                 misc_label = ""
                 misc_total = 0
-                report += "\nMisc bonus must be made up of 'XdY' and/or flat number terms separated by '+'. Ignoring misc bonus."
+                report += "\nMisc bonus must be made up of 'XdY' and/or flat number terms separated by '+' or '-'. Ignoring misc bonus."
 
         if report:
             await context.send(report.strip())
@@ -420,13 +424,19 @@ class PTU(commands.Cog):
         printString += f"\nRolling on the {area + biome + city + route} table..."
         
         found_list = []
+        found_names = set()
         while len(found_list) < rolls:
             selection = weightedTable(table)
             if selection['pokemon'] in biome_table:
                 printString += f"\n    Rolling on the {selection['pokemon']} subtable..."
                 selection = weightedTable(biome_table[selection['pokemon']])
-            if not advantage or not selection in found_list:
+            if level >= (int(selection['min_level']) - UNDERLEVELED_POKEMON_ADJUSTMENT):
+                effective_name = selection['pokemon']
+            else:
+                effective_name = selection['prevolution']
+            if not advantage or effective_name not in found_names:
                 found_list.append(selection)
+                found_names.add(effective_name)
 
         found_count = len(found_list)
         printString += "\nYou found"

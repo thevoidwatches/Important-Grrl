@@ -53,6 +53,8 @@ class Dice(commands.Cog):
         if explode == 1:
             explode = 0
             await context.send("Exploding dice cannot be set to explode on rolls of 1 and up. Turning exploding dice off.")
+        elif explode < 0:
+            await context.send("Exploding dice cannot be set to explode on negative rolls. Turning exploding dice off.")
 
         # sets whether or not to add a plus sign when appending the bonus
         if bonus > 0:

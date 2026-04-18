@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+import logging
 
 #connection to discord
 intents = discord.Intents.default()
@@ -30,4 +31,4 @@ async def on_message(message):
     pass
 
 token = open('auth.txt').read()
-bot.run(token, reconnect = True)
+bot.run(token, reconnect = True, log_level=logging.WARNING)
