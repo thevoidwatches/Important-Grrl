@@ -35,6 +35,7 @@ ptuHelp = """
     `/fossil` will randomly identify a fossil from the fossil table.
     `/dowse` will automatically find use a dowsing rod.
     `/train` will calculate how much experience a pokemon has after one or more training sessions.
+    `/five_strike` will randomly generate a Five Strike multiplier.
     `/metronome` will randomly select a move to use from Metronome (not yet implemented)
     `/nature` will randomly generate one of the 36 Natures.
     `/type` will randomly generate one of the 18 Types
@@ -76,10 +77,11 @@ class PTU(commands.Cog):
         bonus="Your Attack or Special Attack.",
         crit="True if you rolled a critical hit.",
         flat="Set as true to use the set damage for a given Damage Base, instead of rolling.",
+        multiplier="A multiplier applied to the damage base's dice and bonus. Defaults to 1. Crit adds 1 to this.",
         misc_bonus="Extra damage bonuses from abilities, items, etc. Accepts formats like '1d6+2', '1d10', or '5'.",
         label="The label to declare for this command."
     )
-    async def damage(self, context, db: int, bonus: int, crit: bool = False, flat: bool = False, misc_bonus: str = "", label: str = ""):
+    async def damage(self, context, db: int, bonus: int, crit: bool = False, flat: bool = False, multiplier: int = 1, misc_bonus: str = "", label: str = ""):
         # Loads in the damage base information.
         report = ""
         if db < 1 or db > 24:
@@ -96,6 +98,10 @@ class PTU(commands.Cog):
         if bonus < 0:
             report += "\nAttack and Special Attack cannot be negative. Adjusting to a bonus of 0."
             bonus = 0
+
+        if multiplier < 1:
+            report += "\nMultiplier must be at least 1. Adjusting to 1."
+            multiplier = 1
 
         misc_total = 0
         misc_label = ""
@@ -132,9 +138,10 @@ class PTU(commands.Cog):
             await context.send(report.strip())
 
         if crit:
-            dice *= 2
-            db_bonus *= 2
-            db_flat *= 2
+            multiplier += 1
+        dice *= multiplier
+        db_bonus *= multiplier
+        db_flat *= multiplier
 
         printString = label
 
@@ -608,6 +615,31 @@ class PTU(commands.Cog):
         if curr_level < 100:
             printString += f" They will reach level {curr_level + 1} after earning another {to_next_level} exp."
         
+        await context.send(printString.strip())
+
+    @commands.hybrid_command(description="Automatically generates a Five Strike multiplier in PTU.")
+    @app_commands.describe(
+        db="The Damage Base of the attack. If included, the final DB after the multiplier is reported.",
+        label="The label to declare for this command."
+    )
+    async def five_strike(self, context, db: int = 0, label: str = ""):
+        roll = random.randint(1, 8)
+        if roll == 1:
+            multiplier = 1
+        elif roll <= 3:
+            multiplier = 2
+        elif roll <= 6:
+            multiplier = 3
+        elif roll == 7:
+            multiplier = 4
+        else:
+            multiplier = 5
+
+        printString = label
+        printString += f"\nRolled a {roll} on a d8, for a Five Strike multiplier of **x{multiplier}!**"
+        if db:
+            printString += f"\nDB {db} x{multiplier} = **DB {db * multiplier}.**"
+        printString += "\nApply STAB, Technician, Type Gems, and similar effects after the multiplier."
         await context.send(printString.strip())
 
     @commands.hybrid_command(description="Randomly select a move to use using Metronome, in PTU.")
